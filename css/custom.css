@@ -2,7 +2,7 @@
     max-width: 800px;
     background: black;
     padding: 5px;
-    margin: 20px;
+    margin: 0;
 }
 .shelf{
     width: 100%;
@@ -25,13 +25,15 @@
     height: auto;
 }
 .button{
-    float: right;
+    float: left;
     margin-bottom: 5px;
     background: white;
     border-radius: 10px;
     padding: 5px;
 }
-
+.button img{
+    width: 15px;
+}
 .catalyst3550{
     background-image: url("../assets/cisco/catalyst3550.png");
 }
@@ -81,4 +83,24 @@ textarea {
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+
+  @media only screen and (max-width: 500px) {
+    .button{
+        padding: 2px;
+    }
+    .button img{
+        width: 15px;
+    }
+  }
+
+  
+  @media only screen and (max-width: 380px) {
+    .button{
+        padding: 1px;
+    }
+    .button img{
+        width: 10px;
+    }
   }
