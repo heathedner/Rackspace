@@ -1,8 +1,21 @@
-.rackContainer{
+.mobile-only{
+    display: none;
+}
+.racks{
     max-width: 800px;
+    display: inline-table;
+    margin-right: 10px;
+}
+.rackContainer{
+    width: 100%;
     background: black;
     padding: 5px;
     margin: 0;
+}
+.rackTitle{
+    color: white;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .shelf{
     width: 100%;
@@ -34,18 +47,25 @@
 .button img{
     width: 15px;
 }
-.catalyst3550{
-    background-image: url("../assets/cisco/catalyst3550.png");
-}
-
-
 textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-
     width: 100%;
 }
+
+.closetInfo{
+    display: inline-table;
+    border: 2px solid black;
+    max-width: 500px;
+    height: 500px;
+}
+
+.timestamp table{
+    width: 100%;
+    background-color: red;
+}
+
 
 /* The Modal (background) */
 .modal {
