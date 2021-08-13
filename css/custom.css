@@ -55,15 +55,22 @@ textarea {
 }
 
 .closetInfo{
-    display: inline-table;
+    display: inline;
+    position: fixed;
+    text-align: center;
+    right: 0;
     border: 2px solid black;
-    max-width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 100%;
 }
 
 .timestamp table{
-    width: 100%;
-    background-color: red;
+    margin: auto;
+    margin-top: 10px;
+}
+.timestamp table td{
+    border: 1px solid black;
+    
 }
 
 
@@ -103,6 +110,13 @@ textarea {
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  @media only screen and (max-width: 1245px) {
+    .closetInfo{
+        position: static;
+        
+    }
   }
 
 

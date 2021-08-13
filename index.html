@@ -67,7 +67,7 @@
         </div>
     </div>
     <hr style="margin: 20px 0 20px 0; width: 100%;">
-    <!-- <div class="rackContainer">
+    <div class="rackContainer">
         <h3 class="rackTitle">Rack 2</h3>
         <div class="shelf">
             <div class="device blank">
@@ -123,14 +123,15 @@
                 <span onclick="deviceNotes(1,5)" class="button"><img src="assets/note.png"></span>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
 
 <div class="closetInfo">
     <div class="timestamp">
+        <h2>Timestamps</h2>
         <table id="timeTable"></table>
-        <tr></tr>
     </div>
+    <hr>
 </div>
 
 
@@ -143,6 +144,13 @@
     <button onclick="setShelf('assets/placeholder.png')">Remove Unit</button>
     <button onclick="setShelf('assets/fiber.png')">Fiber Tray</button>
     <button onclick="setShelf('assets/pc.png')">Computer Shelf</button>
+
+    <h4>Patch Panels</h4>
+    <button onclick="setShelf('assets/patchpanels/24patch.png')">24 Port Panel </button>
+    <button onclick="setShelf('assets/patchpanels/24patch_staggered.png')">24 Port Panel Staggered</button>
+    <button onclick="setShelf('assets/patchpanels/48patch.png')">48 Port Panel 1U</button>
+    <button onclick="setShelf('assets/patchpanels/48patch_2U.png')">48 Port Panel 2U</button>
+    <button onclick="setShelf('assets/patchpanels/32patch_empty.png')">32 Empty Port Panel</button>
 
     <h4>Cisco</h4>
     <button onclick="setShelf('assets/cisco/3550.png')">Catalyst 3550</button>
@@ -175,7 +183,19 @@ var currentShelf = 0;
 //Temp Data
 
 var notesArray = [["Rack 1 Shelf 1 Notes","Rack 1 Shelf 2 Notes", "Rack 1 Shelf 3 Notes","Rack 1 Shelf 4 Notes","Rack 1 Shelf 5 Notes","Rack 1 Shelf 6 Notes"],["Rack 2 Shelf 1 Notes","Rack 2 Shelf 2 Notes", "Rack 2 Shelf 3 Notes","Rack 2 Shelf 4 Notes","Rack 2 Shelf 5 Notes","Rack 2 Shelf 6 Notes"] ];
-var fakeTimestamps = ["Accessed on: 1/2/3","Accessed on: 4/5/6 ~ Mowed the Grass",""]
+var fakeTimestamps = ["1/2/3@2:30,Igniting Pilot Lights","4/5/6@1:10,Mowed the Grass","7/8/9@1:50,Constructed Additional Pylons"]
+const date = new Date();
+var timestamp = date.getDay() + "/" + date.getMonth() + "/" + date.getYear() + "@" + date.getHours()+":"+date.getMinutes()+", no comment <textarea></textarea>";
+fakeTimestamps.unshift(timestamp);
+getTimestamps('~');
+
+function getTimestamps(note){
+    for (var i = 0; i < fakeTimestamps.length; i++){
+        var timeStampSplit = fakeTimestamps[i].split(',');
+        document.getElementById("timeTable").innerHTML += '<tr><td>'+timeStampSplit[0]+'</td><td>'+timeStampSplit[1]+'</td></tr>';
+    }
+}
+
 
 function setShelf(image){
     document.getElementById("r"+currentRack+"s"+currentShelf).src = image;
