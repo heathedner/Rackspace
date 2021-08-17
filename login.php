@@ -1,43 +1,59 @@
 <?php
+
+
+//Connection Variables:
+$dbhost = "localhost";
+$dbname = "main";
+$dbuser = "root";
+$dbpass = 'root$plinzedous0n';
+
+//Connect to SQL:
+$conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+// Enable Error Mesaging
+$conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 $user = '';
 $pass = '';
-$error_msg = "Login Invalid";
-if(isset($_POST['login_submit'])){
+$error_msg = "Enter Username & Password";
+if(isset($_POST['login_submit']))
+{
+    //Start Session
     session_start();
-    $user = $_POST['username'];
-    $pass = $_POST['password'];
 
-    if(empty($user)){
-        echo nl2br("Blank Username \n");
+    if(empty($_POST['username'])){
+        echo "Invalid Username";
         echo $error_msg;
-    } else if($pass){
-        echo nl2br("Blank Password \n");
+    } else if(empty($_POST['password'])){
+        echo "Invalid Password";
         echo $error_msg;
-
     } else {
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
         
         //SQL:
-        $query = $conn->prepare("SELECT * FROM login WHERE user = :u AND password = :p");
+        $query = $conn->prepare("SELECT * FROM login WHERE user = :u AND password= :p");
         $query->bindParam(':u',$user);
         $query->bindParam(':p',$pass);
-
-        //Execute:
         $query->execute();
-
         $number_rows = $query->fetch(PDO::FETCH_NUM);
-        echo $number_rows;
-
         if($number_rows>0){
             echo $user;
-            $_SESSION['usern'] = $user;
-            $_SESSION['passw'] = $pass;
+            $_SESSION = $user;
+            $_SESSION = $pass;
             header("Location: home.php");
         } else {
             echo "Invalid Username or Password";
             header("Location: index.php");
+            
         }
     }
+   
+  
+} else {
+    echo "Login Not Performed";
 }
+echo $user;
+echo $pass;
 ?>
 
 <html>
@@ -51,7 +67,7 @@ if(isset($_POST['login_submit'])){
 </head>
 
 <body>
-<form action="" method="post" name="login">
+<form action="login.php" method="post" name="login">
 <input type="text" name="username" placeholder="Enter Username"/>
 <input type="text" name="password" placeholder="Enter Password"/>
 <input type="submit" name="login_submit" value="Login"/>
